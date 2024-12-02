@@ -3,34 +3,48 @@ name: Deploy Main
 on:
   schedule:
     - cron: '0 21 * * *'  # Todos os dias às 21:00 (UTC)
+  push:
+    branches:
+      - develop
+      - main
+
+permissions:
+  contents: write  # Permite gravar no repositório
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Passo 1: Verificar o código do repositório
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Passo 2: Configurar Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
+      # Passo 3: Instalar dependências
       - name: Install dependencies
         run: npm install
 
-      - name: Executar migrações do banco de dados
+      # Passo 4: Executar migrações do banco de dados
+      - name: Run migrations (Production)
         run: npx knex migrate:latest --env production
         env:
-          DATABASE_URL: "postgresql://postgres.oxzbqtkdwwcoutyicwro:Audithorium!1505@aws-0-sa-east-1.pooler.supabase.com:6543/postgres"
+          DATABASE_URL: ${{ secrets.DATABASE_URL_PRODUCTION }}
 
+      # Passo 5: Instalar Firebase CLI
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
+      # Passo 6: Autenticar com Firebase
       - name: Authenticate with Firebase
         run: firebase use --project sysmain-df031 --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
 
+      # Passo 7: Fazer deploy no Firebase Hosting
       - name: Deploy to Firebase Hosting
         run: |
           firebase use --project sysmain-df031 --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
