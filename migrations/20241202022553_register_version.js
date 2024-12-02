@@ -1,9 +1,7 @@
 exports.up = function(knex) {
-    return knex('sua_tabela')
+    return knex('registro')
       .insert([
-        { coluna1: 'valor1', coluna2: 'valor2', coluna3: 'valor3' },
-        { coluna1: 'valor4', coluna2: 'valor5', coluna3: 'valor6' },
-        { coluna1: 'valor7', coluna2: 'valor8', coluna3: 'valor9' }
+        { name: 'Registro1', version: '1.0.0' }
       ])
       .then(() => {
         console.log('Registros inseridos com sucesso.');
@@ -14,8 +12,8 @@ exports.up = function(knex) {
   };
   
   exports.down = function(knex) {
-    return knex('sua_tabela')
-      .whereIn('coluna1', ['valor1', 'valor4', 'valor7'])  // Certifique-se de usar critérios que identifiquem corretamente os registros
+    return knex('registro')
+      .whereIn('name', ['Registro1'])  // Exclui os registros inseridos
       .del()
       .then(() => {
         console.log('Registros deletados com sucesso.');
@@ -24,4 +22,3 @@ exports.up = function(knex) {
         console.error('Erro ao deletar os registros:', err);
       });
   };
-  
