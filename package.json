@@ -1,0 +1,14 @@
+{
+    "name": "ci-cd-pipeline-example",
+    "version": "1.0.0",
+    "description": "Projeto com pipeline CI/CD usando GitHub Actions, Firebase Hosting e Supabase PostgreSQL",
+    "main": "index.js",
+    "scripts": {
+        "migrate:dev": "knex migrate:latest --env development",
+        "migrate:prod": "knex migrate:latest --env production"
+    },
+    "dependencies": {
+        "knex": "^2.5.1",
+        "pg": "^8.13.1"
+    }
+}
