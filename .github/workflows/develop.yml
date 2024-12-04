@@ -33,26 +33,18 @@ jobs:
           npm install
           npm install -g firebase-tools knex
 
-      # Autenticar com Firebase
-      - name: Authenticate with Firebase
-        run: firebase use --project sysmain-df031 --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
+      # Executar migrações do banco de dados
+      - name: Run database migrations
+        run: npx knex migrate:latest --env production
 
            # Instalar Firebase CLI
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      # Seleciona o site a ser efetuado o hosting
-      - name: Select which Firebase to use
-        run: firebase target:apply hosting develop sysdevelop
-
       # Autenticar com Firebase
       - name: Authenticate with Firebase
-        run: firebase use --project sysdevelop --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
+        run: firebase use --project sysmain-df031 --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
 
       # Fazer deploy no Firebase Hosting
       - name: Deploy to Firebase Hosting
-<<<<<<< HEAD
         run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
-=======
-        run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
->>>>>>> b07cfd73a484831788beacd27e150ecbdd0133e0
