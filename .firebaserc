@@ -1,7 +1,10 @@
 {
-  "projects": {
-    "default": "sysmain-df031",
-    "main": "sysmain-df031",
-    "develop": "sysdevelop-4b219"
+  "targets": {
+    "sysmain-df031": {
+      "hosting": {
+        "main": ["sysmain-df031"],
+        "develop": ["sysdevelop"]
+      }
+    }
   }
 }
