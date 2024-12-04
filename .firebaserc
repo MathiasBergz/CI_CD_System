@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "sysmain-df031",
+    "main": "sysmain-df031",
+    "develop": "sysdevelop-4b219"
+  }
+}
