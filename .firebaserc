@@ -1,16 +1,5 @@
 {
-  "projects": {},
-  "targets": {
-    "sysmain-df031": {
-      "hosting": {
-        "main": [
-          "sysmain-df031"
-        ],
-        "develop": [
-          "sysdevelop"
-        ]
-      }
-    }
-  },
-  "etags": {}
+  "projects": {
+    "default": "sysmain-df031"
+  }
 }
