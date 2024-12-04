@@ -32,6 +32,10 @@ jobs:
       - name: Run database migrations
         run: npx knex migrate:latest --env production
 
+      # Autenticar com Firebase
+      - name: Authenticate with Firebase
+        run: firebase use --project sysmain-df031 --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
+
       # Fazer deploy no Firebase Hosting
       - name: Deploy to Firebase Hosting
-        run: firebase deploy --only hosting:main --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
+        run: firebase deploy --only hosting --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
