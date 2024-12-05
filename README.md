@@ -5,7 +5,7 @@ Este projeto consiste na configuração e operação de uma pipeline de CI/CD pa
 
 As atualizações do sistema e do banco de dados são realizadas de forma automatizada:
 
-- Branch develop: Atualizações são acionadas automaticamente ao realizar merges via Pull Request (PR).
+- Branch develop: Atualizações são acionadas automaticamente ao realizar merges via Pull Request (PR) ou por push.
 
 - Branch main: Atualizações são agendadas diariamente às 21:00 horas.
 
@@ -60,11 +60,15 @@ npm install
 
 ## Configurar o Firebase Hosting
 
-- Criar um site no Firebase vinculando tanto main quanto a develop.
+- Criar um site no Firebase (uma para a main e outra para a develop).
 - Configurar o CLI do Firebase e conectar o projeto aos sites.
 
-## Executar Migrações Locais (opcional)
-npx knex migrate:latest --env=development  
+## Criar as migrações locais
+npx knex migrate:make <nome do arquivo> 
+
+## Executar as migrações
+npx knex migrate:latest --env production (main)
+npx knex migrate:latest --env development (develop)
 
 ### Workflows
 ## Workflow develop.yml
@@ -81,7 +85,7 @@ Gatilho: Agendado diariamente às 21:00 horas (CRON).
 Ações:
 - Instalar dependências.
 - Executar migrações pendentes para o banco de dados.
-- Fazer deploy da página HTML no Firebase (site main).
+- Fazer deploy da página HTML no Firebase (site main ou develop).
 
 ### Observações
 - Migrações no Banco: Certifique-se de criar as migrações adequadas com Knex.js para alterações no esquema de dados.
