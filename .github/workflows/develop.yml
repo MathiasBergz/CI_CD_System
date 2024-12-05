@@ -35,7 +35,7 @@ jobs:
 
       # Executar migrações do banco de dados
       - name: Run database migrations
-        run: npx knex migrate:latest --env production
+        run: npx knex migrate:latest --env development
 
            # Instalar Firebase CLI
       - name: Install Firebase CLI
@@ -43,7 +43,7 @@ jobs:
 
       # Autenticar com Firebase
       - name: Authenticate with Firebase
-        run: firebase use --project sysmain-df031 --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
+        run: firebase use --project sysdevelop --token ${{ secrets.FIREBASE_AUTH_TOKEN }}
 
       # Fazer deploy no Firebase Hosting
       - name: Deploy to Firebase Hosting
