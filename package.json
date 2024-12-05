@@ -7,7 +7,9 @@
     "start": "node index.js",
     "migrate:latest": "knex migrate:latest --env production",
     "migrate:rollback": "knex migrate:rollback --env production",
-    "migrate:make": "knex migrate:make"
+    "migrate:make": "knex migrate:make",
+    "deploy:main": "cd firebase/main/firebase.json firebase.json && firebase deploy",
+    "deploy:develop": "cd firebase/develop/firebase.json firebase.json && firebase deploy"
   },
   "keywords": [],
   "author": "",
